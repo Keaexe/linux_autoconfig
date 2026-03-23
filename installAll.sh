@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-
+globalisation
 # Installing yay
 InstallScripts/yay_download.sh
 if [[ $? != 0 ]]; then
@@ -10,7 +10,7 @@ if [[ $? != 0 ]]; then
 fi
 
 # Needed packages
-yay -S --noconfirm --needed trash-cli kitty firefox
+yay -S --noconfirm --needed trash-cli kitty firefox neovim starship
 
 # Setting config files
 if [ -f ~/.bashrc ]; then #bashrc
@@ -28,10 +28,13 @@ if [ -f ~/.config/fastfetch/config.jsonc ]; then # custom fastfetch
 fi
 ln -s ConfigFile/fastfetchConfig.jsonc ~/.config/fastfetch/config.jsonc
 
-if [ -f ~/.config/nvim/init.lua]; then # custom lua
-	echo "dotfile($SCRIPT_DIR/ConfigFiles/init.lua)" >> ~/.config/nvim/init.lua
+if [ -f ~/.config/nvim/lua/config/keymap]; then # custom keymap
+	echo "dotfile($SCRIPT_DIR/ConfigFiles/keymap.lua)" >> ~/.config/nvim/lua/config/keymap.lua
 else
-    ln -s ConfigFile/init.lua ~/.config/nvim/init.lua
+	if [ -f ~/.config/nvim/init.lua]; then
+		mv ~/.config/nvim/init.lua ~/.config/nvim/init.lua.bak
+	fi
+    ln -s ConfigFile/keymap.lua ~/.config/nvim/init.lua
 fi
 
 # Additional packages
