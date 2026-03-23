@@ -6,8 +6,6 @@ end
 -- Remap AZERTY to QWERTY for Normal, Visual, and Operator modes
 local modes = { 'n', 'v', 'o' }
 
-map(modes, 'a', 'q')
-map(modes, 'q', 'a')
 map(modes, 'z', 'w')
 map(modes, 'w', 'z')
 map(modes, 'm', ',') -- M is where comma is on QWERTY
