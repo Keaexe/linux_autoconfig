@@ -17,7 +17,7 @@ map(modes, ',', 'm')
 -- This allows hitting the top row keys directly for counts/actions
 local azerty_top = { "à", "&", "é", '"', "'", "(", "-", "è", "_", "ç" }
 for i, key in ipairs(azerty_top) do
-    map(modes, key, tostring(i % 10))
+    map(modes, key, tostring(i-1 % 10))
 end
 
 -- jj for <Esc>
