@@ -10,7 +10,8 @@ if [[ $? != 0 ]]; then
 fi
 
 # Needed packages
-yay -S --noconfirm --needed trash-cli kitty firefox neovim starship
+pacman -S --noconfirm --needed flatpak firefox
+yay -S --noconfirm --needed trash-cli kitty neovim starship
 
 # Setting config files
 if [ -f ~/.bashrc ]; then #bashrc
@@ -28,8 +29,18 @@ if [ -f ~/.config/fastfetch/config.jsonc ]; then # custom fastfetch
 fi
 ln -s ConfigFile/fastfetchConfig.jsonc ~/.config/fastfetch/config.jsonc
 
-if [ -f ~/.config/nvim/lua/config/keymap]; then # custom keymap
-	echo "dotfile($SCRIPT_DIR/ConfigFiles/keymap.lua)" >> ~/.config/nvim/lua/config/keymap.lua
+read -p "Would you like to install LazyVim ? [Y/n]" wantLazy
+if [[ -z $wantLazy || $wantLazy == 'y' || $wantLazy == 'Y']]; then
+	mv ~/.config/nvim{,.bak}
+	mv ~/.local/share/nvim{,.bak}
+	mv ~/.local/state/nvim{,.bak}
+	mv ~/.cache/nvim{,.bak}
+	git clone https://github.com/LazyVim/starter ~/.config/nvim
+	rm -rf ~/.config/nvim/.git
+fi
+
+if [ -f ~/.config/nvim/lua/config/keymaps.lua]; then # custom keymap
+	echo "dotfile($SCRIPT_DIR/ConfigFiles/keymap.lua)" >> ~/.config/nvim/lua/config/keymaps.lua
 else
 	if [ -f ~/.config/nvim/init.lua]; then
 		mv ~/.config/nvim/init.lua ~/.config/nvim/init.lua.bak
@@ -38,4 +49,10 @@ else
 fi
 
 # Additional packages
-yay -S --noconfirm --needed vesktop tor rust devtoolbox onlyoffice isoimagewriter nextcloud-client beeper-v4-bin vlc kdeconnect gabutdm localsend
+yay_packages=('vesktop-bin' 'rust' 'devtoolbox' 'onlyoffice' 'isoimagewriter' 'nextcloud-client' 'beeper-v4-bin' 'kdeconnect' 'gabutdm' 'localsend')
+flat_packages=('org.torproject.torbrowser-launcher')
+
+
+
+yay -S --noconfirm --needed $yay_packages
+flatpak install flathub  -y $flat_packages
