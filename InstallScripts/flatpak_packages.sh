@@ -15,6 +15,7 @@ if [ -n $ignored ]; then
 	done
 fi
 
-if [[ $ignored != 'A' ]]; then
+
+if [[ packages != '' && ($ignored != 'A' || $ignored != 'a') ]]; then
 	flatpak install flathub  -y "${packages[@]}"
 fi
