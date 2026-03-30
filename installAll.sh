@@ -2,7 +2,7 @@
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 # Installing yay
-InstallScripts/yay_download.sh
+$SCRIPT_DIR/InstallScripts/yay_download.sh
 if [[ $? != 0 ]]; then
     echo "Could not install yay, aborting..."
     exit 1
@@ -10,7 +10,15 @@ fi
 
 # Needed packages
 sudo pacman -S --noconfirm --needed flatpak firefox
+if [[ $? != 0 ]]; then
+    echo "Could not install mandatory pacman packages, aborting..."
+    exit 1
+fi
 yay -S --noconfirm --needed trash-cli kitty neovim starship fastfetch
+if [[ $? != 0 ]]; then
+    echo "Could not install mandatory yay packages, aborting..."
+    exit 1
+fi
 
 # Setting config files
 if [ -f ~/.bashrc ]; then #bashrc
@@ -29,7 +37,7 @@ fi
 mkdir -p ~/.config/fastfetch
 ln -s $SCRIPT_DIR/ConfigFile/fastfetchConfig.jsonc ~/.config/fastfetch/config.jsonc
 
-read -p "Would you like to install LazyVim ? [Y/n]" wantLazy
+read -p "Would you like to install LazyVim ? [Y/n]" wantLazy # lazyvim
 if [[ -z $wantLazy || $wantLazy == 'y' || $wantLazy == 'Y' ]]; then
 	if [ -d ~/.config/nvim ]; then
 		mv ~/.config/nvim{,.bak}
@@ -41,7 +49,7 @@ if [[ -z $wantLazy || $wantLazy == 'y' || $wantLazy == 'Y' ]]; then
 	rm -rf ~/.config/nvim/.git
 fi
 
-if [ -f ~/.config/nvim/lua/config/keymaps.lua ]; then # custom keymap
+if [ -f ~/.config/nvim/lua/config/keymaps.lua ]; then # custom keymap for neovim
 	echo "dotfile($SCRIPT_DIR/ConfigFiles/keymap.lua)" >> ~/.config/nvim/lua/config/keymaps.lua
 else
 	if [ -f ~/.config/nvim/init.lua ]; then
@@ -50,31 +58,5 @@ else
     ln -s $SCRIPT_DIR/ConfigFile/keymap.lua ~/.config/nvim/init.lua
 fi
 
-# Additional packages
-yay_packages=('vesktop-bin' 'rust' 'devtoolbox' 'onlyoffice' 'isoimagewriter' 'nextcloud-client' 'beeper-v4-bin' 'kdeconnect' 'gabutdm' 'localsend')
-flat_packages=('org.torproject.torbrowser-launcher')
-
-echo "Optionals yay packages :"
-for i in "${!yay_packages[@]}"; do
-  echo "$(($i + 1)) : ${yay_packages[$i]}"
-done
-read -p "Enter the number of the packages you don't want to install" ignored_packages
-for package in $ignored_packages; do
-	if [[ $package > 0 && $package <= ${#yay_packages[@]} ]]; then
-		yay_packages["${package - 1}"]=''
-	fi
-done
-
-echo "Optionals flatpak packages :"
-for i in "${!flat_packages[@]}"; do
-  echo "$(($i + 1)) : ${flat_packages[$i]}"
-done
-read -p "Enter the number of the packages you don't want to install" ignored_packages
-for package in $ignored_packages; do
-	if [[ $ignored_packages > 0 && $ignored_packages <= ${#flat_packages[@]} ]]; then
-		flat_packages["${package - 1}"]=''
-	fi
-done
-
-yay -S --noconfirm --needed ${yay_packages[@]}
-flatpak install flathub  -y ${flat_packages[@]}
+$SCRIPT_DIR/InstallScripts/yay_packages.sh
+$SCRIPT_DIR/InstallScripts/flatpak_packages
