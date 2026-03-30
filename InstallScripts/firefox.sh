@@ -7,7 +7,7 @@ read -p "Do you want to share cookies and history between main browser and web a
 if [[ -z $ans || $ans == 'y' || $ans == 'Y' ]]; then
     SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
     sed -i -e 's/setsid*2}\"/firefox --new-window "$1"/g' ~/.local/share/omarchy/bin/omarchy-launch-webapp
-    $SCRIPT_DIR/InstallScripts/enableFirefoxStyleSheet.sh
+    $SCRIPT_DIR/enableFirefoxStyleSheet.sh
 
     # Searching for the profile folder
     PROFILES_INI="$HOME/.mozilla/firefox/profiles.ini"
