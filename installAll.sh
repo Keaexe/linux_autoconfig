@@ -2,10 +2,14 @@
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 # Installing yay
-$SCRIPT_DIR/InstallScripts/yay_download.sh
-if [[ $? != 0 ]]; then
-    echo "Could not install yay, aborting..."
-    exit 1
+
+pacman -Qi yay > /dev/null
+if [[ $? == 1 ]]; then
+	if [[ $? != 0 ]]; then
+		echo "Could not install yay, aborting..."
+		exit 1
+	fi
+	$SCRIPT_DIR/InstallScripts/yay_download.sh
 fi
 
 # Needed packages
