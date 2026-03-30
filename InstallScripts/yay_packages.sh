@@ -1,6 +1,6 @@
 #!/bin/bash
 
-packages=('vesktop-bin' 'rust' 'devtoolbox' 'onlyoffice' 'isoimagewriter' 'nextcloud-client' 'beeper-v4-bin' 'kdeconnect' 'gabutdm' 'localsend')
+packages=('vesktop-bin' 'rust' 'firefox' 'devtoolbox' 'onlyoffice' 'isoimagewriter' 'nextcloud-client' 'beeper-v4-bin' 'kdeconnect' 'gabutdm' 'localsend')
 echo "Optional yay packages :"
 for i in "${!packages[@]}"; do
   echo "$(($i + 1)) : ${packages[$i]}"
