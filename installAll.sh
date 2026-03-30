@@ -9,7 +9,7 @@ if [[ $? != 0 ]]; then
 fi
 
 # Needed packages
-sudo pacman -S --noconfirm --needed flatpak 
+sudo pacman -S --noconfirm --needed flatpak
 if [[ $? != 0 ]]; then
     echo "Could not install mandatory pacman packages, aborting..."
     exit 1
