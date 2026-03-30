@@ -39,7 +39,6 @@ alias vi='nvim'
 alias vim='nvim'
 alias svi='sudo vi'
 alias yayf="yay -Slq | fzf --multi --preview 'yay -Sii {1}' --preview-window=down:75% | xargs -ro yay -S"
-alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 
 # cd into the old directory
@@ -49,7 +48,6 @@ alias bd='cd "$OLDPWD"'
 alias rmd='/bin/rm  --recursive --force --verbose '
 
 # Shortcuts
-alias ll='ls -las'
 alias sys='systemctl'
 
 # Search running processes

@@ -25,7 +25,7 @@ $SCRIPT_DIR/InstallScripts/firefox.sh
 
 # Setting config files
 if [ -f ~/.bashrc ]; then #bashrc
-	mv ~/.bashrc ~/.bashrc.bak 
+	echo "source $SCRIPT_DIR" >> ~/.local/share/omarchy/default/bash/rc
 fi
 ln -s $SCRIPT_DIR/ConfigFile/.bashrc ~/.bashrc
 
