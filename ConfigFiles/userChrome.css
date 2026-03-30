@@ -1,0 +1,27 @@
+/* MADE BY AI */
+
+/* 1. TARGETING BY WINDOW TYPE 
+  This hides the UI only if the window is a "popup" type 
+  (often used by web-app launchers).
+*/
+main-window[tabsintitlebar="true"][windowtype="Mozilla:Firefox"] #nav-bar, 
+main-window[tabsintitlebar="true"][windowtype="Mozilla:Firefox"] #TabsToolbar {
+  /* Default: Visible */
+}
+
+/* 2. THE "APP MODE" CONDITION
+  If the window is launched without a standard toolbar (toolbar=no),
+  hide the Navigation and Tab bars.
+*/
+#main-window[sizemode="normal"] #nav-bar[hidden="true"],
+#main-window[sizemode="maximized"] #nav-bar[hidden="true"] {
+  display: none !important;
+}
+
+/* 3. THE "SEARCH" OVERRIDE
+  If you want to hide the URL bar on EVERYTHING EXCEPT when you 
+  specifically hit Ctrl+L (Focus Location), use this:
+*/
+#nav-bar:not([focus-within]) {
+  visibility: collapse !important;
+}
