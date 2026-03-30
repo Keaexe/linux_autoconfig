@@ -15,6 +15,6 @@ if [ -n $ignored ]; then
 	done
 fi
 
-if [[ packages != '' && ($ignored != 'A' || $ignored != 'a') ]]; then
+if [[ packages != '' || $ignored != 'A' || $ignored != 'a' ]]; then
 	yay -S --noconfirm --needed "${packages[@]}"
 fi
