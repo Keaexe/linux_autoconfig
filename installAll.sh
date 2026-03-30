@@ -65,4 +65,4 @@ else
 fi
 
 $SCRIPT_DIR/InstallScripts/yay_packages.sh
-$SCRIPT_DIR/InstallScripts/flatpak_packages
+$SCRIPT_DIR/InstallScripts/flatpak_packages.sh
