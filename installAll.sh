@@ -31,7 +31,6 @@ $SCRIPT_DIR/InstallScripts/firefox.sh
 if [ -f ~/.bashrc ]; then #bashrc
 	echo "source $SCRIPT_DIR" >> ~/.local/share/omarchy/default/bash/rc
 fi
-ln -s $SCRIPT_DIR/ConfigFile/.bashrc ~/.bashrc
 
 if [ -f ~/.config/starship.toml ]; then # catpuccine mocha starship 
 	mv ~/.config/starship.toml ~/.config/starship.toml.bak 

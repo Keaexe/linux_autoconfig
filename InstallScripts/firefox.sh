@@ -11,10 +11,12 @@ if [[ -z $ans || $ans == 'y' || $ans == 'Y' ]]; then
 
     # Searching for the profile folder
     PROFILES_INI="$HOME/.mozilla/firefox/profiles.ini"
-    RELATIVE_PATH=$(grep -E "^Path=" "$PROFILES_INI" | head -n 1 | cut -d'=' -f2)
-    ABS_PATH="$HOME/.mozilla/firefox/$RELATIVE_PATH"
+    # Clearing the result
+    RELATIVE_PATH=$(grep "^Path=" "$PROFILES_INI" | head -n 1 | cut -d'=' -f2 | sed 's/\r//')
 
-    ln -s $SCRIPT_DIR/ConfigFiles/userChrome.css $ABS_PATH/chrome/userChrome.css
+    ABS_PATH="$HOME/.mozilla/firefox/$RELATIVE_PATH"
+    mkdir -p "$ABS_PATH/chrome"
+    ln -sf "$SCRIPT_DIR/ConfigFiles/userChrome.css" "$ABS_PATH/chrome/userChrome.css"
 else
     yay -S --noconfirm --needed firefoxpwa
     firefox -P WebApps
