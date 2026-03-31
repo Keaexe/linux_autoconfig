@@ -28,20 +28,19 @@ fi
 $SCRIPT_DIR/InstallScripts/firefox.sh
 
 # Setting config files
-if [ -f ~/.bashrc ]; then #bashrc
-	echo "source $SCRIPT_DIR" >> ~/.local/share/omarchy/default/bash/rc
-fi
+
+echo "source $SCRIPT_DIR/ConfigFiles/.bashrc" >> ~/.local/share/omarchy/default/bash/rc # bashrc
 
 if [ -f ~/.config/starship.toml ]; then # catpuccine mocha starship 
 	mv ~/.config/starship.toml ~/.config/starship.toml.bak 
 fi
-ln -sf $SCRIPT_DIR/ConfigFile/starship.toml ~/.config/starship.toml
+ln -sf $SCRIPT_DIR/ConfigFiles/starship.toml ~/.config/starship.toml
 
+mkdir -p ~/.config/fastfetch
 if [ -f ~/.config/fastfetch/config.jsonc ]; then # custom fastfetch
 	mv ~/.config/fastfetch/config.jsonc ~/.config/fastfetch/config.jsonc.bak
 fi
-mkdir -p ~/.config/fastfetch
-ln -sf $SCRIPT_DIR/ConfigFile/fastfetchConfig.jsonc ~/.config/fastfetch/config.jsonc
+ln -sf $SCRIPT_DIR/ConfigFiles/fastfetchConfig.jsonc ~/.config/fastfetch/config.jsonc
 
 read -p "Would you like to install LazyVim ? [Y/n]" wantLazy # lazyvim
 if [[ -z $wantLazy || $wantLazy == 'y' || $wantLazy == 'Y' ]]; then
@@ -61,7 +60,7 @@ else
 	if [ -f ~/.config/nvim/init.lua ]; then
 		mv ~/.config/nvim/init.lua ~/.config/nvim/init.lua.bak
 	fi
-    ln -sf $SCRIPT_DIR/ConfigFile/keymap.lua ~/.config/nvim/init.lua
+    ln -sf $SCRIPT_DIR/ConfigFiles/keymap.lua ~/.config/nvim/init.lua
 fi
 
 $SCRIPT_DIR/InstallScripts/yay_packages.sh
