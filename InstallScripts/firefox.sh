@@ -8,6 +8,10 @@ if [[ -z $ans || $ans == 'y' || $ans == 'Y' ]]; then
     SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
     sed -i -e 's/setsid*2}\"/firefox --new-window "$1"/g' ~/.local/share/omarchy/bin/omarchy-launch-webapp
     $SCRIPT_DIR/enableFirefoxStyleSheet.sh
+    if [[ $? != 0 ]]; then
+        echo "Cannot enable firefox style sheet, aborting setting firefox as webapp handler"
+        exit 0
+    fi
 
     # Searching for the profile folder
     PROFILES_INI="$HOME/.mozilla/firefox/profiles.ini"
