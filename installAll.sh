@@ -1,8 +1,8 @@
 #!/bin/bash
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-# Installing yay
 
+# Installing yay
 pacman -Qi yay > /dev/null
 if [[ $? == 1 ]]; then
 	if [[ $? != 0 ]]; then
@@ -28,20 +28,16 @@ fi
 $SCRIPT_DIR/InstallScripts/firefox.sh
 
 # Setting config files
-
 echo "source $SCRIPT_DIR/ConfigFiles/.bashrc" >> ~/.local/share/omarchy/default/bash/rc # bashrc
-
 if [ -f ~/.config/starship.toml ]; then # catpuccine mocha starship 
 	mv ~/.config/starship.toml ~/.config/starship.toml.bak 
 fi
 ln -sf $SCRIPT_DIR/ConfigFiles/starship.toml ~/.config/starship.toml
-
-mkdir -p ~/.config/fastfetch
-if [ -f ~/.config/fastfetch/config.jsonc ]; then # custom fastfetch
+mkdir -p ~/.config/fastfetch # custom fastfetch
+if [ -f ~/.config/fastfetch/config.jsonc ]; then
 	mv ~/.config/fastfetch/config.jsonc ~/.config/fastfetch/config.jsonc.bak
 fi
 ln -sf $SCRIPT_DIR/ConfigFiles/fastfetchConfig.jsonc ~/.config/fastfetch/config.jsonc
-
 read -p "Would you like to install LazyVim ? [Y/n]" wantLazy # lazyvim
 if [[ -z $wantLazy || $wantLazy == 'y' || $wantLazy == 'Y' ]]; then
 	if [ -d ~/.config/nvim ]; then
@@ -53,7 +49,6 @@ if [[ -z $wantLazy || $wantLazy == 'y' || $wantLazy == 'Y' ]]; then
 	git clone https://github.com/LazyVim/starter ~/.config/nvim
 	rm -rf ~/.config/nvim/.git
 fi
-
 if [ -f ~/.config/nvim/lua/config/keymaps.lua ]; then # custom keymap for neovim
 	echo "dotfile($SCRIPT_DIR/ConfigFiles/keymap.lua)" >> ~/.config/nvim/lua/config/keymaps.lua
 else
