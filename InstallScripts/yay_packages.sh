@@ -7,14 +7,13 @@ for i in "${!packages[@]}"; do
 done
 read -p "Enter the number of the packages you don't want to install 
 ('A' for all, 'return' for none) : " ignored
-if [ -n $ignored ]; then
+if [[ $ignored != '' && $ignored != 'A' && $ignored != 'a']]; then
 	for package in $ignored; do
 		if (( package > 0 && package <= ${#packages[@]} )); then
 			packages["$((package - 1))"]=''
 		fi
 	done
 fi
-
-if [[ packages != '' || $ignored != 'A' || $ignored != 'a' ]]; then
+if [[ $packages != '' && $ignored != 'A' && $ignored != 'a' ]]; then
 	yay -S --noconfirm --needed "${packages[@]}"
 fi
