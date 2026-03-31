@@ -11,6 +11,7 @@ while [ -z "$PROFILE_DIR" ]; do
     fi
     echo "Please create a profile"
     firefox -P $PROFILE_DIR
+    PROFILE_DIR=$(find ~/.mozilla/firefox/ -maxdepth 1 -type d -name "*.default-release" | head -n 1)
 done
 
 echo "Targeting profile: $PROFILE_DIR"
