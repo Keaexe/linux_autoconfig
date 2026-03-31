@@ -1,7 +1,16 @@
 #!/bin/bash
 
-# Find the Firefox profile directory
-PROFILE_DIR=$(find ~/.mozilla/firefox/ -maxdepth 1 -type d -name "*.default-release" | head -n 1)
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+get_profile_dir() {
+    # Searching for the profile folder
+    PROFILES_INI="$HOME/.mozilla/firefox/profiles.ini"
+    # Clearing the result
+    RELATIVE_PATH=$(grep "^Path=" "$PROFILES_INI" | head -n 1 | cut -d'=' -f2 | tr -d '\r')
+    echo "$HOME/.mozilla/firefox/$RELATIVE_PATH"
+}
+
+PROFILE_DIR=$(get_profile-dir())
 while [ -z "$PROFILE_DIR" ]; do
     echo "Could not find Firefox profile."
     pacman -Qi firefox > /dev/null
@@ -11,7 +20,7 @@ while [ -z "$PROFILE_DIR" ]; do
     fi
     echo "Please create a profile"
     firefox -P
-    PROFILE_DIR=$(find ~/.mozilla/firefox/ -maxdepth 1 -type d -name "*.default-release" | head -n 1)
+    PROFILE_DIR=$(get_profile-dir())
 done
 
 echo "Targeting profile: $PROFILE_DIR"
@@ -26,4 +35,5 @@ else
     echo 'user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);' >> "$PREFS_FILE"
 fi
 
+ln -sf "$SCRIPT_DIR/ConfigFiles/userChrome.css" "$PROFILE_DIR/chrome/userChrome.css"
 echo "Stylesheets enabled. Please restart Firefox for changes to take effect."

@@ -10,17 +10,8 @@ if [[ -z $ans || $ans == 'y' || $ans == 'Y' ]]; then
     $SCRIPT_DIR/enableFirefoxStyleSheet.sh
     if [[ $? != 0 ]]; then
         echo "Cannot enable firefox style sheet, aborting setting firefox as webapp handler"
-        exit 0
+        exit 1
     fi
-
-    # Searching for the profile folder
-    PROFILES_INI="$HOME/.mozilla/firefox/profiles.ini"
-    # Clearing the result
-    RELATIVE_PATH=$(grep "^Path=" "$PROFILES_INI" | head -n 1 | cut -d'=' -f2 | sed 's/\r//')
-
-    ABS_PATH="$HOME/.mozilla/firefox/$RELATIVE_PATH"
-    mkdir -p "$ABS_PATH/chrome"
-    ln -sf "$SCRIPT_DIR/ConfigFiles/userChrome.css" "$ABS_PATH/chrome/userChrome.css"
 else
     yay -S --noconfirm --needed firefoxpwa
     firefox -P WebApps
