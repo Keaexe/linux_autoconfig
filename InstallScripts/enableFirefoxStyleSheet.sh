@@ -5,7 +5,7 @@ PROFILE_DIR=$(find ~/.mozilla/firefox/ -maxdepth 1 -type d -name "*.default-rele
 while [ -z "$PROFILE_DIR" ]; do
     echo "Could not find Firefox profile."
     pacman -Qi firefox
-    if [[ $? != 0 ]]
+    if [[ $? != 0 ]]; then
         echo "Firefox has not been installed, script failed"
         exit 1
     fi
