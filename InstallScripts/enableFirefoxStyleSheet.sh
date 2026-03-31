@@ -10,7 +10,7 @@ get_profile_dir() {
     echo "$HOME/.mozilla/firefox/$RELATIVE_PATH"
 }
 
-PROFILE_DIR=$(get_profile-dir())
+PROFILE_DIR=$(get_profile-dir)
 while [ -z "$PROFILE_DIR" ]; do
     echo "Could not find Firefox profile."
     pacman -Qi firefox > /dev/null
@@ -20,7 +20,7 @@ while [ -z "$PROFILE_DIR" ]; do
     fi
     echo "Please create a profile"
     firefox -P
-    PROFILE_DIR=$(get_profile-dir())
+    PROFILE_DIR=$(get_profile-dir)
 done
 
 echo "Targeting profile: $PROFILE_DIR"
