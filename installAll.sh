@@ -28,18 +28,18 @@ fi
 if [ -f ~/.bashrc ]; then #bashrc
 	mv ~/.bashrc ~/.bashrc.bak 
 fi
-ln -sf $SCRIPT_DIR/ConfigFile/.bashrc ~/.bashrc
+ln -sf $SCRIPT_DIR/ConfigFiles/.bashrc ~/.bashrc
 
 if [ -f ~/.config/starship.toml ]; then # catpuccine mocha starship 
 	mv ~/.config/starship.toml ~/.config/starship.toml.bak 
 fi
-ln -sf $SCRIPT_DIR/ConfigFile/starship.toml ~/.config/starship.toml
+ln -sf $SCRIPT_DIR/ConfigFiles/starship.toml ~/.config/starship.toml
 
 if [ -f ~/.config/fastfetch/config.jsonc ]; then # custom fastfetch
 	mv ~/.config/fastfetch/config.jsonc ~/.config/fastfetch/config.jsonc.bak
 fi
 mkdir -p ~/.config/fastfetch
-ln -sf $SCRIPT_DIR/ConfigFile/fastfetchConfig.jsonc ~/.config/fastfetch/config.jsonc
+ln -sf $SCRIPT_DIR/ConfigFiles/fastfetchConfig.jsonc ~/.config/fastfetch/config.jsonc
 
 read -p "Would you like to install LazyVim ? [Y/n]" wantLazy # lazyvim
 if [[ -z $wantLazy || $wantLazy == 'y' || $wantLazy == 'Y' ]]; then
@@ -59,7 +59,7 @@ else
 	if [ -f ~/.config/nvim/init.lua ]; then
 		mv ~/.config/nvim/init.lua ~/.config/nvim/init.lua.bak
 	fi
-    ln -sf $SCRIPT_DIR/ConfigFile/keymap.lua ~/.config/nvim/init.lua
+    ln -sf $SCRIPT_DIR/ConfigFiles/keymap.lua ~/.config/nvim/init.lua
 fi
 
 $SCRIPT_DIR/InstallScripts/yay_packages.sh
