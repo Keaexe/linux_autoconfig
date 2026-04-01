@@ -54,16 +54,14 @@ if [[ -z $wantLazy || $wantLazy == 'y' || $wantLazy == 'Y' ]]; then
 	rm -rf ~/.config/nvim/.git
 fi
 if [ -f ~/.config/nvim/lua/config/keymaps.lua ]; then # custom keymap for neovim
-	if [ -f ~/.config/nvim/lua/config/keymaps.lua ]; then
-		mv ~/.config/nvim/lua/config/keymaps.lua ~/.config/nvim/init.lua.bak
-	fi
-    ln -sf $SCRIPT_DIR/ConfigFiles/keymap.lua ~/.config/nvim/lua/config/keymaps.lua
+	KEYMAP_FILE="~/.config/nvim/lua/config/keymaps.lua"
 else
-	if [ -f ~/.config/nvim/init.lua ]; then
-		mv ~/.config/nvim/init.lua ~/.config/nvim/init.lua.bak
-	fi
-    ln -sf $SCRIPT_DIR/ConfigFiles/keymap.lua ~/.config/nvim/init.lua
+	KEYMAP_FILE="~/.config/nvim/init.lua"
 fi
+if [ -f $KEYMAP_FILE ]; then
+	mv $KEYMAP_FILE $KEYMAP_FILE.bak
+fi
+ln -sf $SCRIPT_DIR/ConfigFiles/keymap.lua $KEYMAP_FILE
 
 $SCRIPT_DIR/InstallScripts/yay_packages.sh
 $SCRIPT_DIR/InstallScripts/flatpak_packages.sh
