@@ -28,7 +28,11 @@ fi
 $SCRIPT_DIR/InstallScripts/firefox.sh
 
 # Setting config files
-echo "source $SCRIPT_DIR/ConfigFiles/.bashrc" >> ~/.local/share/omarchy/default/bash/rc # bashrc
+if [ -f ~/.bashrc ]; then #bashrc
+	mv ~/.bashrc ~/.bashrc.bak 
+fi
+ln -sf $SCRIPT_DIR/ConfigFiles/.bashrc ~/.bashrc
+
 if [ -f ~/.config/starship.toml ]; then # catpuccine mocha starship 
 	mv ~/.config/starship.toml ~/.config/starship.toml.bak 
 fi
@@ -50,7 +54,10 @@ if [[ -z $wantLazy || $wantLazy == 'y' || $wantLazy == 'Y' ]]; then
 	rm -rf ~/.config/nvim/.git
 fi
 if [ -f ~/.config/nvim/lua/config/keymaps.lua ]; then # custom keymap for neovim
-	echo "dotfile($SCRIPT_DIR/ConfigFiles/keymap.lua)" >> ~/.config/nvim/lua/config/keymaps.lua
+	if [ -f ~/.config/nvim/lua/config/keymaps.lua ]; then
+		mv ~/.config/nvim/lua/config/keymaps.lua ~/.config/nvim/init.lua.bak
+	fi
+    ln -sf $SCRIPT_DIR/ConfigFiles/keymap.lua ~/.config/nvim/lua/config/keymaps.lua
 else
 	if [ -f ~/.config/nvim/init.lua ]; then
 		mv ~/.config/nvim/init.lua ~/.config/nvim/init.lua.bak
