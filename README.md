@@ -9,10 +9,12 @@ Welcome! This is a collection of scripts designed to turn a fresh Arch-based ins
 The base script handles the core heavy lifting for a clean, productive system:
 
 * **Package Managers:** Installs `yay` (AUR helper) and `flatpak`.
-* **Shell Experience:** * **Custom `.bashrc`** for productivity.
+* **Shell Experience:**
+    * **Custom `.bashrc`** for productivity.
     * **Starship Prompt:** Styled with the **Catppuccin Mocha** theme.
     * **Fastfetch:** Custom configuration for a clean system summary.
-* **Editor (LazyVim):** * Full Neovim setup via LazyVim.
+* **Editor (LazyVim):** 
+    * **Full Neovim setup** via LazyVim.
     * **Custom Keymaps:** Optimized specifically for **AZERTY** keyboards.
 
 ---
@@ -22,8 +24,7 @@ The base script handles the core heavy lifting for a clean, productive system:
 I also maintain a specialized fork called **Omarchy Setup**. This version includes everything above plus:
 
 * **Firefox as Default:** Sets Firefox as the primary system browser.
-* **Web App Integration:** Automated scripts to use Firefox for PWAs (Web Apps) with a chromeless, "native" look using `userChrome.css`.
-* **Profile Automation:** Includes logic to automatically detect or create Firefox profiles and enable stylesheet support via bash.
+* **Web App Integration:** Automated scripts to use Firefox for Web Apps with a chromeless, "native" look using `userChrome.css`.
 
 ---
 
@@ -37,7 +38,7 @@ I also maintain a specialized fork called **Omarchy Setup**. This version includ
 git clone https://github.com/Keaexe/linux_autoconfig.git
 cd linux_autoconfig
 
-# Optional for omarchy
+# Optional (for omarchy)
 # git checkout omarchy_autoconfig
 
 # Make the script executable
