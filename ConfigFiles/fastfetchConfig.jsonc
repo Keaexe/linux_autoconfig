@@ -77,12 +77,12 @@
             "keyColor": "yellow"
         },
         {
-            "type": "theme",
-            "key": "󰉼 Theme",
+            "type": "de",
+            "key": "󰉼 DE",
             "keyColor": "#813d9c"
         },
         {
-            "type": "font",
+            "type": "terminalfont",
             "key": "│ ├󰬴",
             "keyColor": "#813d9c"
         },

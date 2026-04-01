@@ -1,8 +1,3 @@
-#!/usr/bin/env bash
-if [ -f /usr/bin/fastfetch ]; then
-	fastfetch
-fi
-
 # Autostart ssh
 if ! pgrep -x "ssh-agent" > /dev/null; then
     eval "$(ssh-agent -s)"
