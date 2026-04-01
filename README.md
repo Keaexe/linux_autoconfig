@@ -34,11 +34,14 @@ I also maintain a specialized fork called **Omarchy Setup**. This version includ
 
 ```bash
 # Clone the repository
-git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
-cd your-repo-name
+git clone https://github.com/Keaexe/linux_autoconfig.git
+cd linux_autoconfig
+
+# Optional for omarchy
+# git checkout omarchy_autoconfig
 
 # Make the script executable
-chmod +x setup.sh
+chmod +x installAll.sh
 
 # Run the setup
-./setup.sh
+./installAll.sh
