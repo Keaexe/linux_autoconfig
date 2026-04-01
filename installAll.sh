@@ -51,17 +51,19 @@ if [[ -z $wantLazy || $wantLazy == 'y' || $wantLazy == 'Y' ]]; then
 	fi
 	git clone https://github.com/LazyVim/starter ~/.config/nvim
 	rm -rf ~/.config/nvim/.git
+	read -p "Would you like my azerty keymaps ? [y/N] : " wantkeymap
+	if [[ $wantkeymap == 'y' || $wantkeymap == 'Y' ]]; then
+		if [ -f ~/.config/nvim/lua/config/keymaps.lua ]; then # custom keymap for neovim
+			KEYMAP_FILE="~/.config/nvim/lua/config/keymaps.lua"
+		else
+			KEYMAP_FILE="~/.config/nvim/init.lua"
+		fi
+		if [ -f $KEYMAP_FILE ]; then
+			mv $KEYMAP_FILE $KEYMAP_FILE.bak
+		fi
+		ln -sf $SCRIPT_DIR/ConfigFiles/keymap.lua $KEYMAP_FILE
+	fi
 fi
-
-if [ -f ~/.config/nvim/lua/config/keymaps.lua ]; then # custom keymap for neovim
-	KEYMAP_FILE="~/.config/nvim/lua/config/keymaps.lua"
-else
-	KEYMAP_FILE="~/.config/nvim/init.lua"
-fi
-if [ -f $KEYMAP_FILE ]; then
-	mv $KEYMAP_FILE $KEYMAP_FILE.bak
-fi
-ln -sf $SCRIPT_DIR/ConfigFiles/keymap.lua $KEYMAP_FILE
 
 $SCRIPT_DIR/InstallScripts/yay_packages.sh
 $SCRIPT_DIR/InstallScripts/flatpak_packages.sh
