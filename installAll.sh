@@ -54,7 +54,10 @@ if [[ -z $wantLazy || $wantLazy == 'y' || $wantLazy == 'Y' ]]; then
 fi
 
 if [ -f ~/.config/nvim/lua/config/keymaps.lua ]; then # custom keymap for neovim
-	echo "dotfile($SCRIPT_DIR/ConfigFiles/keymap.lua)" >> ~/.config/nvim/lua/config/keymaps.lua
+	if [ -f ~/.config/nvim/lua/config/keymaps.lua ]; then
+		mv ~/.config/nvim/lua/config/keymaps.lua ~/.config/nvim/init.lua.bak
+	fi
+    ln -sf $SCRIPT_DIR/ConfigFiles/keymap.lua ~/.config/nvim/lua/config/keymaps.lua
 else
 	if [ -f ~/.config/nvim/init.lua ]; then
 		mv ~/.config/nvim/init.lua ~/.config/nvim/init.lua.bak
