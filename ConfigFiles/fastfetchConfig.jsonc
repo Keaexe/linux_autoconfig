@@ -77,28 +77,23 @@
             "keyColor": "yellow"
         },
         {
-            "type": "de",
-            "key": " DE",
+            "type": "wm",
+            "key": " WM/DE",
             "keyColor": "blue"
         },
         {
             "type": "terminalfont",
             "key": "│ ├󰬴",
-            "keyColor": "#813d9c"
+            "keyColor": "blue"
         },
         {
             "type": "cursor",
             "key": "│ ├",
-            "keyColor": "#813d9c"
+            "keyColor": "blue"
         },
         {
             "type": "lm",
             "key": "│ ├",
-            "keyColor": "blue"
-        },
-        {
-            "type": "wm",
-            "key": "│ ├",
             "keyColor": "blue"
         },
         {
