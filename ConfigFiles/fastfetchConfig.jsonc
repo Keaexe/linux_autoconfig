@@ -78,8 +78,8 @@
         },
         {
             "type": "de",
-            "key": "󰉼 DE",
-            "keyColor": "#813d9c"
+            "key": " DE",
+            "keyColor": "blue"
         },
         {
             "type": "terminalfont",
@@ -87,19 +87,9 @@
             "keyColor": "#813d9c"
         },
         {
-            "type": "wmtheme",
-            "key": "│ ├",
-            "keyColor": "#813d9c"
-        },
-        {
             "type": "cursor",
-            "key": "└ └",
+            "key": "│ ├",
             "keyColor": "#813d9c"
-        },
-        {
-            "type": "de",
-            "key": " DE",
-            "keyColor": "blue"
         },
         {
             "type": "lm",
@@ -149,6 +139,5 @@
             "paddingLeft": 2,
             "symbol": "circle"
         }
- 
     ]
 }
