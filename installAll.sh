@@ -42,28 +42,18 @@ if [ -f ~/.config/fastfetch/config.jsonc ]; then
 	mv ~/.config/fastfetch/config.jsonc ~/.config/fastfetch/config.jsonc.bak
 fi
 ln -sf $SCRIPT_DIR/ConfigFiles/fastfetchConfig.jsonc ~/.config/fastfetch/config.jsonc
-read -p "Would you like to install LazyVim ? [Y/n]" wantLazy # lazyvim
-if [[ -z $wantLazy || $wantLazy == 'y' || $wantLazy == 'Y' ]]; then
-	if [ -d ~/.config/nvim ]; then
-		mv ~/.config/nvim{,.bak}
-		mv ~/.local/share/nvim{,.bak}
-		mv ~/.local/state/nvim{,.bak}
-		mv ~/.cache/nvim{,.bak}
+
+read -p "Would you like my azerty keymaps for neovim ? [y/N] : " wantkeymap
+if [[ $wantkeymap == 'y' || $wantkeymap == 'Y' ]]; then
+	if [ -f ~/.config/nvim/lua/config/keymaps.lua ]; then # custom keymap for neovim
+		KEYMAP_FILE="~/.config/nvim/lua/config/keymaps.lua"
+	else
+		KEYMAP_FILE="~/.config/nvim/init.lua"
 	fi
-	git clone https://github.com/LazyVim/starter ~/.config/nvim
-	rm -rf ~/.config/nvim/.git
-	read -p "Would you like my azerty keymaps ? [y/N] : " wantkeymap
-	if [[ $wantkeymap == 'y' || $wantkeymap == 'Y' ]]; then
-		if [ -f ~/.config/nvim/lua/config/keymaps.lua ]; then # custom keymap for neovim
-			KEYMAP_FILE="~/.config/nvim/lua/config/keymaps.lua"
-		else
-			KEYMAP_FILE="~/.config/nvim/init.lua"
-		fi
-		if [ -f $KEYMAP_FILE ]; then
-			mv $KEYMAP_FILE $KEYMAP_FILE.bak
-		fi
-		ln -sf $SCRIPT_DIR/ConfigFiles/keymap.lua $KEYMAP_FILE
+	if [ -f $KEYMAP_FILE ]; then
+		mv $KEYMAP_FILE $KEYMAP_FILE.bak
 	fi
+	ln -sf $SCRIPT_DIR/ConfigFiles/keymap.lua $KEYMAP_FILE
 fi
 
 $SCRIPT_DIR/InstallScripts/yay_packages.sh
