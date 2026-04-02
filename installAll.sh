@@ -31,7 +31,7 @@ if [[ -z $ans || $ans == 'y' || $ans == 'Y' ]]; then
 fi
 
 # Setting config files
-echo "$SCRIPT_DIR/ConfigFiles/.bashrc" >> ~/.bashrc
+echo "source $SCRIPT_DIR/ConfigFiles/.bashrc" >> ~/.bashrc
 
 if [ -f ~/.config/starship.toml ]; then # catpuccine mocha starship 
 	mv ~/.config/starship.toml ~/.config/starship.toml.bak 
