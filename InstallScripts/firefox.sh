@@ -3,19 +3,11 @@ yay -S --noconfirm --needed firefox
 xdg-settings set default-web-browser firefox.desktop
 
 
-read -p "Do you want to share cookies and history between main browser and web apps ? [Y/n]" ans
+read -p "Do you want as web ? [Y/n]" ans
 if [[ -z $ans || $ans == 'y' || $ans == 'Y' ]]; then
-    SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-    sed -i -e 's/setsid*2}\"/firefox --new-window "$1"/g' ~/.local/share/omarchy/bin/omarchy-launch-webapp
-    $SCRIPT_DIR/enableFirefoxStyleSheet.sh
-    if [[ $? != 0 ]]; then
-        echo "Cannot enable firefox style sheet, aborting setting firefox as webapp handler"
-        exit 1
-    fi
-else
     yay -S --noconfirm --needed firefoxpwa
-    firefox -P WebApps
-    sed -i -e 's/setsid*2}\"/firefox -P WebApps --new-window "$1"/g' ~/.local/share/omarchy/bin/omarchy-launch-webapp
+    firefox -CreateProfile "WebApps"
+    sed -i "s|setsid.*2}\"|firefox -P WebApps --class 'Omarchy' --new-instance --new-window \"\$1\"|g" ~/.local/share/omarchy/bin/omarchy-launch-webapp
     echo "Opening \"Progressive Web Apps for Firefox\" extension in Firefox...
 Please add it to firefox"
     sleep 1
