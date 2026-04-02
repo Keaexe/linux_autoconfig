@@ -25,13 +25,13 @@ if [[ $? != 0 ]]; then
 fi
 
 # Set firefox as default
-$SCRIPT_DIR/InstallScripts/firefox.sh
+read -p "Do you want firefox as webApps handler ? [Y/n]" ans
+if [[ -z $ans || $ans == 'y' || $ans == 'Y' ]]; then
+	$SCRIPT_DIR/InstallScripts/firefox.sh
+fi
 
 # Setting config files
-if [ -f ~/.bashrc ]; then #bashrc
-	mv ~/.bashrc ~/.bashrc.bak 
-fi
-ln -sf $SCRIPT_DIR/ConfigFiles/.bashrc ~/.bashrc
+echo "$SCRIPT_DIR/ConfigFiles/.bashrc" >> ~/.bashrc
 
 if [ -f ~/.config/starship.toml ]; then # catpuccine mocha starship 
 	mv ~/.config/starship.toml ~/.config/starship.toml.bak 
@@ -44,16 +44,13 @@ fi
 ln -sf $SCRIPT_DIR/ConfigFiles/fastfetchConfig.jsonc ~/.config/fastfetch/config.jsonc
 
 read -p "Would you like my azerty keymaps for neovim ? [y/N] : " wantkeymap
-if [[ $wantkeymap == 'y' || $wantkeymap == 'Y' ]]; then
-	if [ -f ~/.config/nvim/lua/config/keymaps.lua ]; then # custom keymap for neovim
-		KEYMAP_FILE="~/.config/nvim/lua/config/keymaps.lua"
-	else
-		KEYMAP_FILE="~/.config/nvim/init.lua"
+if [[ $wantkeymap == 'y' || $wantkeymap == 'Y' ]]; then # custom keymap for neovim
+	KEYMAP_DIR="~/.config/nvim/lua/config/keymaps.lua"
+	mkdir -p "$KEYMAP_DIR"
+	if [ -f "$KEYMAP_DIR/keymaps.lua"]; then
+		mv "$KEYMAP_DIR/keymaps.lua" "$KEYMAP_DIR/keymaps.lua.bak"
 	fi
-	if [ -f $KEYMAP_FILE ]; then
-		mv $KEYMAP_FILE $KEYMAP_FILE.bak
-	fi
-	ln -sf $SCRIPT_DIR/ConfigFiles/keymap.lua $KEYMAP_FILE
+	ln -sf "$SCRIPT_DIR/ConfigFiles/keymap.lua" "$KEYMAP_DIR/keymaps.lua"
 fi
 
 $SCRIPT_DIR/InstallScripts/yay_packages.sh
