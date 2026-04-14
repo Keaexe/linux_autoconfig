@@ -15,7 +15,6 @@ The base script handles the core heavy lifting for a clean, productive system:
     * **Fastfetch:** Custom configuration for a clean system summary.
 * **Editor (LazyVim):** 
     * **Full Neovim setup** via LazyVim.
-    * **Custom Keymaps:** Optimized specifically for **AZERTY** keyboards. (Optional)
 
 ---
 
@@ -24,7 +23,7 @@ The base script handles the core heavy lifting for a clean, productive system:
 I also maintain a specialized fork called **amarchy_autoconfig**. This version includes everything above plus:
 
 * **Firefox as Default:** Sets Firefox as the primary system browser.
-* **Web App Integration:** Automated scripts to use Firefox for Web Apps with a chromeless, "native" look using `PWAsForFirefox`.
+* **Web App Integration:** Automated scripts to use Firefox or Zen-Browser for Web Apps
 
 ---
 
