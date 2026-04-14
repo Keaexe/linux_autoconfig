@@ -1,6 +1,6 @@
 #!/bin/bash
 
-packages=('org.torproject.torbrowser-launcher')
+packages=('org.torproject.torbrowser-launcher' 'com.github.gabutakut.gabutdm' 'com.github.IsmaelMartinez.teams_for_linux')
 echo "Optional flatpak packages :"
 for i in "${!packages[@]}"; do
   echo "$(($i + 1)) : ${packages[$i]}"
