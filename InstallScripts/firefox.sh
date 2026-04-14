@@ -3,7 +3,7 @@
 yay -S --noconfirm --needed firefox firefoxpwa
 xdg-settings set default-web-browser firefox.desktop
 firefox -CreateProfile "WebApps"
-sed -i "s|setsid.*2}\"|firefox -P WebApps --class 'Omarchy' --new-instance --new-window \"\$1\"|g" ~/.local/share/omarchy/bin/omarchy-launch-webapp
+sed -i "s|setsid.*2}\"|firefox -P WebApps --new-window \"\$1\"|g" ~/.local/share/omarchy/bin/omarchy-launch-webapp
 echo "Opening \"Progressive Web Apps for Firefox\" extension in Firefox...
 Please add it to firefox"
 sleep 1

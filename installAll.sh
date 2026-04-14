@@ -24,10 +24,15 @@ if [[ $? != 0 ]]; then
     exit 1
 fi
 
-# Set firefox as default
-read -p "Do you want firefox as webApps handler ? [Y/n]" ans
-if [[ -z $ans || $ans == 'y' || $ans == 'Y' ]]; then
+# Set default browser
+echo "Which browser do you want as WebApp handler ?"
+read -p "[F]irefox [Z]en-browser Chromium (default [RETURN])" ans
+if [[ -z $ans || $ans == 'f' || $ans == 'F' ]]; then
 	$SCRIPT_DIR/InstallScripts/firefox.sh
+else 
+	if [[ -z $ans || $ans == 'z' || $ans == 'Z' ]]; then
+		$SCRIPT_DIR/InstallScripts/zen.sh
+	fi
 fi
 
 # Setting config files
