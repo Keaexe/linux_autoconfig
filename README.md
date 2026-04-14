@@ -20,7 +20,7 @@ The base script handles the core heavy lifting for a clean, productive system:
 
 ## 🪾 Omarchy Setup (The Fork)
 
-I also maintain a specialized fork called **amarchy_autoconfig**. This version includes everything above plus:
+I also maintain a specialized fork called **omarchy_autoconfig**. This version includes everything above plus:
 
 * **Firefox as Default:** Sets Firefox as the primary system browser.
 * **Web App Integration:** Automated scripts to use Firefox or Zen-Browser for Web Apps
